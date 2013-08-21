@@ -37,10 +37,11 @@ public class SimpleStorage implements StorageProvider {
 		return false;
 	}
 
-	public DirectoryListing ls(String root) {
+	public DirectoryListing ls(String root) throws FileNotFoundException {
 		File absoluteRoot = new File(storagePath, root);
-		
-		return null;
+		if (! absoluteRoot.exists())
+			throw new FileNotFoundException();
+		return new DirectoryListing(storagePath, absoluteRoot.list());
 	}
 
 	public String getStoragePath() {
