@@ -14,7 +14,7 @@
 	
   <bean id="simpleStorage" class="org.oark.verflixt.core.storage.provider.SimpleStorage">
 	<property name="storagePath">
-    	<value>/foo/bar</value>
+    	<value>/tmp</value>
   	</property>
   </bean>
 

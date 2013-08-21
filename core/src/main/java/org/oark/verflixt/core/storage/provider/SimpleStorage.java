@@ -6,11 +6,14 @@ import java.io.InputStream;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SimpleStorage implements StorageProvider {
-
+	
+	private static Logger log = LoggerFactory.getLogger(SimpleStorage.class);
 
 	private String storagePath;
 	private File storage;
@@ -20,6 +23,7 @@ public class SimpleStorage implements StorageProvider {
 		this.storage = new File(storagePath);
 		if (! storage.exists())
 			throw new FileNotFoundException();
+		log.info("initialized with path " + storagePath);
 	}
 	
 	public boolean write(InputStream input, String target) {
