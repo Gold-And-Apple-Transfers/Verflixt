@@ -1,6 +1,7 @@
 package org.oark.verflixt.core.storage.provider;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import javax.annotation.PostConstruct;
@@ -15,8 +16,10 @@ public class SimpleStorage implements StorageProvider {
 	private File storage;
 	
 	@PostConstruct
-	public void init() {
+	public void init() throws FileNotFoundException {
 		this.storage = new File(storagePath);
+		if (! storage.exists())
+			throw new FileNotFoundException();
 	}
 	
 	public boolean write(InputStream input, String target) {
@@ -34,10 +37,11 @@ public class SimpleStorage implements StorageProvider {
 		return false;
 	}
 
-	public DirectoryListing ls(String root) {
+	public DirectoryListing ls(String root) throws FileNotFoundException {
 		File absoluteRoot = new File(storagePath, root);
-		
-		return null;
+		if (! absoluteRoot.exists())
+			throw new FileNotFoundException();
+		return new DirectoryListing(storagePath, absoluteRoot.list());
 	}
 
 	public String getStoragePath() {
