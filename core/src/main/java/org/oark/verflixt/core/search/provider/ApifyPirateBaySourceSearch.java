@@ -41,7 +41,7 @@ public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 	void search(String query) {
 		try {
 			JSONArray searchResult;
-			searchResult = readJsonFromUrl(buildURI("test"));
+			searchResult = readJsonFromUrl(buildURI(query));
 
 			List<TorrentSource> result = new ArrayList<TorrentSource>();
 
