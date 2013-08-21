@@ -10,5 +10,11 @@
 			http://www.springframework.org/schema/context/spring-context-3.0.xsd">
  
 	<context:component-scan base-package="org.oark.verflixt" />
+	
+  <bean id="simpleStorage" class="org.oark.verflixt.core.storage.provider.SimpleStorage">
+	<property name="storagePath">
+    	<value>/foo/bar</value>
+  	</property>
+  </bean>
 
 </beans:beans>

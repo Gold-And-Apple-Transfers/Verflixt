@@ -2,15 +2,19 @@ package org.oark.verflixt.core.storage.provider;
 
 import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Path;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.core.io.Resource;
 
-@Component
 public class SimpleStorage implements StorageProvider {
-	@Autowired
-	private File storagePath;
 
+	private String storagePath;
+	private File storage;
+	
+	public SimpleStorage() {
+		this.storage = new File(storagePath);
+	}
+	
 	public boolean write(InputStream input, String target) {
 		// TODO Auto-generated method stub
 		return false;
@@ -32,11 +36,11 @@ public class SimpleStorage implements StorageProvider {
 		return null;
 	}
 
-	public File getStoragePath() {
+	public String getStoragePath() {
 		return storagePath;
 	}
 
-	public void setStoragePath(File storagePath) {
+	public void setStoragePath(String storagePath) {
 		this.storagePath = storagePath;
 	}
 }
