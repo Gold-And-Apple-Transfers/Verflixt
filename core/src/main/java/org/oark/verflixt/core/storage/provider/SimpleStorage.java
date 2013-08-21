@@ -2,9 +2,6 @@ package org.oark.verflixt.core.storage.provider;
 
 import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Path;
-
-import org.springframework.core.io.Resource;
 
 public class SimpleStorage implements StorageProvider {
 
