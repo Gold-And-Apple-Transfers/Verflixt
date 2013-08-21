@@ -26,6 +26,11 @@
   		<artifactId>spring-context</artifactId>
   		<version>3.2.4.RELEASE</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.json</groupId>
+  		<artifactId>org.json</artifactId>
+  		<version>chargebee-1.0</version>
+  	</dependency>
   </dependencies>
   <properties>
   	<spring.version>3.2.4.RELEASE</spring.version>
