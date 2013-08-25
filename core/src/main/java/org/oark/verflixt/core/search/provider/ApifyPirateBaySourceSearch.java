@@ -38,33 +38,30 @@ public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 	}
 
 	@Override
-	void search(String query) {
+	List<ContentSource> search(String query) throws IOException {
+		
+		List<ContentSource> result = new ArrayList<ContentSource>();
+		
 		try {
-			JSONArray searchResult;
-			searchResult = readJsonFromUrl(buildURI(query));
+			JSONArray jsonResult;
+			jsonResult = readJsonFromUrl(buildURI(query));
 
-			List<TorrentSource> result = new ArrayList<TorrentSource>();
-
-			for (int i = 0; i < searchResult.length(); i++) {
-				JSONObject item = searchResult.getJSONObject(i);
+			for (int i = 0; i < jsonResult.length(); i++) {
+				JSONObject item = jsonResult.getJSONObject(i);
 				TorrentSource src = new TorrentSource(new Date(),
 						item.getString("name"), item.getString("magnet"),
 						item.getInt("seeders"), item.getInt("leechers"));
+				
+				this.log.debug("found : " + src.getName() + "(" + src.getURI() + ")");
+				
 				result.add(src);
 			}
 			
-			//TODO return result
-			for (ContentSource torrentSource : result) {
-				this.log.debug("found : " + torrentSource.getName() );
-			}
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IOException(e);
 		}
+		
+		return result;
 
 	}
 
