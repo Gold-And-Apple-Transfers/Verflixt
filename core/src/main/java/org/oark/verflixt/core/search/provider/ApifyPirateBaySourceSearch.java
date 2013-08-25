@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 
-	Logger log = LoggerFactory.getLogger(ApifyPirateBaySourceSearch.class);
+	private Logger log = LoggerFactory.getLogger(ApifyPirateBaySourceSearch.class);
 
 	@Value("#{ systemProperties['apify.key'] }")
 	private String apikey = "SET PROPERTY apify.key";
