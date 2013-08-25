@@ -1,7 +1,6 @@
 package org.oark.verflixt.core.search.provider;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 public interface ContentSource {
 
