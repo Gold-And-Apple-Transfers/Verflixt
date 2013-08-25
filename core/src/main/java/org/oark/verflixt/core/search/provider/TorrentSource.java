@@ -1,8 +1,10 @@
 package org.oark.verflixt.core.search.provider;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 
-public class TorrentSource {
+public class TorrentSource implements ContentSource {
 	
 	private Date timestamp;
 	
@@ -11,6 +13,24 @@ public class TorrentSource {
 	
 	private int seeder;
 	private int leecher;
+
+	public static final String TYPE = "torrent";
+	
+	/* (non-Javadoc)
+	 * @see org.oark.verflixt.core.search.provider.ContentSource#getType()
+	 */
+	@Override
+	public String getType() {
+		return TorrentSource.TYPE;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.oark.verflixt.core.search.provider.ContentSource#getURI()
+	 */
+	@Override
+	public URI getURI() throws URISyntaxException {
+		return new URI(magnet);
+	}
 	
 	public TorrentSource(Date timestamp, String name, String magnet,
 			int seeder, int leecher) {
@@ -28,6 +48,10 @@ public class TorrentSource {
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
+	/* (non-Javadoc)
+	 * @see org.oark.verflixt.core.search.provider.ContentSource#getName()
+	 */
+	@Override
 	public String getName() {
 		return name;
 	}

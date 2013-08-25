@@ -54,7 +54,7 @@ public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 			}
 			
 			//TODO return result
-			for (TorrentSource torrentSource : result) {
+			for (ContentSource torrentSource : result) {
 				this.log.debug("found : " + torrentSource.getName() );
 			}
 			
