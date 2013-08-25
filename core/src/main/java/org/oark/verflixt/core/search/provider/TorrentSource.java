@@ -4,7 +4,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TorrentSource implements ContentSource {
+	
+	Logger log = LoggerFactory.getLogger(TorrentSource.class);
 	
 	private Date timestamp;
 	
@@ -28,8 +33,13 @@ public class TorrentSource implements ContentSource {
 	 * @see org.oark.verflixt.core.search.provider.ContentSource#getURI()
 	 */
 	@Override
-	public URI getURI() throws URISyntaxException {
-		return new URI(magnet);
+	public URI getURI() {
+		try {
+			return new URI(magnet);
+		} catch (URISyntaxException e) {
+			log.warn("could not create URI for source " + this.name );
+			return null;
+		}
 	}
 	
 	public TorrentSource(Date timestamp, String name, String magnet,

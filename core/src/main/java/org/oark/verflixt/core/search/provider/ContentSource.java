@@ -7,7 +7,7 @@ public interface ContentSource {
 
 	public abstract String getType();
 
-	public abstract URI getURI() throws URISyntaxException;
+	public abstract URI getURI();
 
 	public abstract String getName();
 
