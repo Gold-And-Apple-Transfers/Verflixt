@@ -29,7 +29,7 @@ public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 	@Value("#{ systemProperties['apify.key'] }")
 	private String apikey = "SET PROPERTY apify.key";
 
-	private String tpbService = "http://apify.ifc0nfig.com/tpb/";
+	private String tpbServiceBase = "http://apify.ifc0nfig.com/tpb/";
 
 	@PostConstruct
 	public void init() {
@@ -66,7 +66,7 @@ public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 	}
 
 	protected String buildURI(String query) {
-		return tpbService + "search?id=" + query + "&key=" + apikey;
+		return getTpbServiceBase() + "search?id=" + query + "&key=" + apikey;
 	}
 
 	public String getApikey() {
@@ -98,6 +98,14 @@ public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 		} finally {
 			is.close();
 		}
+	}
+
+	public String getTpbServiceBase() {
+		return tpbServiceBase;
+	}
+
+	public void setTpbServiceBase(String tpbServiceBase) {
+		this.tpbServiceBase = tpbServiceBase;
 	}
 
 }
