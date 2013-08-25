@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +28,9 @@ import org.springframework.stereotype.Component;
 public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 
 	private Logger log = LoggerFactory.getLogger(ApifyPirateBaySourceSearch.class);
-
+	
+	public static String URL_ENCODING_CHARSET = StandardCharsets.UTF_8.name();
+	
 	@Value("#{ systemProperties['apify.key'] }")
 	private String apikey = "SET PROPERTY apify.key";
 
@@ -66,7 +71,16 @@ public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 	}
 
 	protected String buildURI(String query) {
-		return getTpbServiceBase() + "search?id=" + query + "&key=" + apikey;
+		
+		try {
+			query = URLEncoder.encode(query, URL_ENCODING_CHARSET);
+			return getTpbServiceBase() + "search?id=" + query + "&key=" + apikey;
+		} catch (UnsupportedEncodingException e) {
+			// should not happen
+			log.error("could not encode " + query + " in charset", e);
+		}
+		
+		return null;
 	}
 
 	public String getApikey() {
