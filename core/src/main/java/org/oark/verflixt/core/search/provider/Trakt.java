@@ -7,7 +7,9 @@ import java.nio.charset.StandardCharsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Trakt extends ContentSearchProvider {
 	
 	private Logger log = LoggerFactory.getLogger(Trakt.class);
@@ -53,7 +55,7 @@ public class Trakt extends ContentSearchProvider {
 		try {
 			
 			query = URLEncoder.encode(query, URL_ENCODING_CHARSET);
-			return traktBaseAPI + method + "/" + category + "." + FORMAT + "/" + apikey + "/" + query;
+			return getTraktBaseAPI() + method + "/" + category + "." + FORMAT + "/" + getApikey() + "/" + query;
 			
 		} catch (UnsupportedEncodingException e) {
 			// should not happen
@@ -61,6 +63,22 @@ public class Trakt extends ContentSearchProvider {
 		}
 		
 		return null;
+	}
+
+	public String getApikey() {
+		return apikey;
+	}
+
+	public void setApikey(String apikey) {
+		this.apikey = apikey;
+	}
+
+	public String getTraktBaseAPI() {
+		return traktBaseAPI;
+	}
+
+	public void setTraktBaseAPI(String traktBaseAPI) {
+		this.traktBaseAPI = traktBaseAPI;
 	}
 	
 	
