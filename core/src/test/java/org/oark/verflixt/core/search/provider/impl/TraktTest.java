@@ -1,4 +1,4 @@
-package org.oark.verflixt.core.search.provider;
+package org.oark.verflixt.core.search.provider.impl;
 
 import static org.junit.Assert.*;
 
