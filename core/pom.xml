@@ -49,6 +49,11 @@
      <scope>system</scope>
      <systemPath>${basedir}/lib/jputio-1.0-SNAPSHOT.jar</systemPath>
    </dependency>
+  	<dependency>
+  		<groupId>net.sf.flexjson</groupId>
+  		<artifactId>flexjson</artifactId>
+  		<version>3.1</version>
+  	</dependency>
   </dependencies>
   <properties>
   	<spring.version>3.2.4.RELEASE</spring.version>
