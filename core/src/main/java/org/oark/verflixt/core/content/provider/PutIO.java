@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.oark.verflixt.core.content.provider.exceptions.ContentTypeNotSupportedException;
 import org.oark.verflixt.core.search.provider.ContentSource;
 
 public class PutIO implements ContentProvider {
@@ -16,9 +17,8 @@ public class PutIO implements ContentProvider {
 	}
 
 	@Override
-	public boolean getContent(ContentSource src, ContentCallback cb) {
+	public void getContent(ContentSource src, ContentCallback cb) throws ContentTypeNotSupportedException {
 		// TODO Auto-generated method stub
-		return false;
 	}
 
 }
