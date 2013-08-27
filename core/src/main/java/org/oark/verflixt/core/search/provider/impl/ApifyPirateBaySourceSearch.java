@@ -1,4 +1,4 @@
-package org.oark.verflixt.core.search.provider;
+package org.oark.verflixt.core.search.provider.impl;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.oark.verflixt.core.JSONReader;
+import org.oark.verflixt.core.search.provider.ContentSource;
+import org.oark.verflixt.core.search.provider.SourceSearchProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,7 @@ public class ApifyPirateBaySourceSearch extends SourceSearchProvider {
 	}
 
 	@Override
-	List<ContentSource> search(String query) throws IOException {
+	public List<ContentSource> search(String query) throws IOException {
 		
 		List<ContentSource> result = new ArrayList<ContentSource>();
 		

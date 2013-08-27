@@ -1,9 +1,10 @@
-package org.oark.verflixt.core.search.provider;
+package org.oark.verflixt.core.search.provider.impl;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 
+import org.oark.verflixt.core.search.provider.ContentSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
