@@ -1,16 +1,24 @@
 package org.oark.verflixt.core.search.provider;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.oark.verflixt.core.JSONReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Trakt extends ContentSearchProvider {
+public class Trakt {
 	
 	private Logger log = LoggerFactory.getLogger(Trakt.class);
 	
@@ -47,8 +55,30 @@ public class Trakt extends ContentSearchProvider {
 		
 	}
 	
-	public void search(SearchCategory category, String query) {
+	public List<SearchResult> search(SearchCategory category, String query) throws IOException {
 		
+		String uri = buildURI("search", category.toString(), query);
+		
+		List<SearchResult> result = new ArrayList<SearchResult>();
+		
+		try {
+			JSONArray jsonResult;
+			jsonResult = JSONReader.readJsonFromUrl(uri);
+
+			for (int i = 0; i < jsonResult.length(); i++) {
+				JSONObject item = jsonResult.getJSONObject(i);
+				SearchResult src = new SearchResult(item.getString("title"),item.getString("tagline"));
+				
+				this.log.debug("found : " + src.getTitle());
+				
+				result.add(src);
+			}
+			
+		} catch (JSONException e) {
+			throw new IOException(e);
+		}
+		
+		return result;
 	}
 	
 	protected String buildURI(String method, String category, String query) {
@@ -81,6 +111,4 @@ public class Trakt extends ContentSearchProvider {
 		this.traktBaseAPI = traktBaseAPI;
 	}
 	
-	
-
 }
