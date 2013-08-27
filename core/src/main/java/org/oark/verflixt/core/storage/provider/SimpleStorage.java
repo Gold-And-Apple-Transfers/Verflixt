@@ -15,16 +15,16 @@ import org.springframework.stereotype.Component;
 public class SimpleStorage implements StorageProvider {
 	
 	private static Logger log = LoggerFactory.getLogger(SimpleStorage.class);
-
+	
 	private String storagePath;
 	private File storage;
 	
 	@PostConstruct
 	public void init() throws FileNotFoundException {
-		this.storage = new File(storagePath);
+		this.storage = new File(getStoragePath());
 		if (! storage.exists())
 			throw new FileNotFoundException();
-		log.info("initialized with path " + storagePath);
+		log.info("initialized with path " + getStoragePath());
 	}
 	
 	public boolean write(InputStream input, Origin origin) {
@@ -42,4 +42,13 @@ public class SimpleStorage implements StorageProvider {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public String getStoragePath() {
+		return storagePath;
+	}
+
+	public void setStoragePath(String storagePath) {
+		this.storagePath = storagePath;
+	}
+	
 }
