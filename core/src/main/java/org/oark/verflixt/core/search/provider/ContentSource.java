@@ -9,5 +9,7 @@ public interface ContentSource {
 	public abstract URI getURI();
 
 	public abstract String getName();
+	
+	public abstract String getDescription();
 
 }
