@@ -20,9 +20,14 @@ public class SimpleStorageTest {
 	private SimpleStorage simpleStorage;
 	
 	@Test
-	public void list() throws FileNotFoundException {
-		DirectoryListing l = simpleStorage.ls("/");
-		assertNotNull(l);
-		assertTrue(l.getContents().size() > 0);
+	public void search() {
+	}
+	
+	@Test
+	public void write() {
+	}
+	
+	@Test
+	public void read() {
 	}
 }

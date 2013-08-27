@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import javax.annotation.PostConstruct;
+import javax.naming.directory.SearchResult;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,33 +27,19 @@ public class SimpleStorage implements StorageProvider {
 		log.info("initialized with path " + storagePath);
 	}
 	
-	public boolean write(InputStream input, String target) {
+	public boolean write(InputStream input, Origin origin) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean delete(String target) {
+	public boolean read(SimpleStorageEntity entity) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean read(String source) {
+	@Override
+	public SearchResult search(SearchTerm term) {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public DirectoryListing ls(String root) throws FileNotFoundException {
-		File absoluteRoot = new File(storagePath, root);
-		if (! absoluteRoot.exists())
-			throw new FileNotFoundException();
-		return new DirectoryListing(storagePath, absoluteRoot.list());
-	}
-
-	public String getStoragePath() {
-		return storagePath;
-	}
-
-	public void setStoragePath(String storagePath) {
-		this.storagePath = storagePath;
+		return null;
 	}
 }
