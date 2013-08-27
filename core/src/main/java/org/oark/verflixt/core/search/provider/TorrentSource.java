@@ -86,4 +86,10 @@ public class TorrentSource implements ContentSource {
 	public void setLeecher(int leecher) {
 		this.leecher = leecher;
 	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
